@@ -29,3 +29,13 @@
 
 en:
   hello: "Hello world"
+  products:
+    index:
+      title: "Products"
+
+es:
+  hello: "Hola mundo"
+  products:
+    index:
+      title: "Productos"
+
