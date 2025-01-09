@@ -40,6 +40,7 @@ class ProductsController < ApplicationController
     redirect_to products_path, notice: "Product deleted successfully."
   end
 
+
   private
     def set_product
       @product = Product.find(params[:id])
@@ -49,3 +50,4 @@ class ProductsController < ApplicationController
       params.require(:product).permit(:name, :description, :featured_image, :inventory_count)
     end
 end
+
