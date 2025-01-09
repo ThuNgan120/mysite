@@ -12,14 +12,12 @@ class Product < ApplicationRecord
     def back_in_stock?
       inventory_count_previously_was.zero? && inventory_count > 0
     end
-  
+
     def notify_subscribers
       subscribers.each do |subscriber|
         ProductMailer.with(product: self, subscriber: subscriber).in_stock.deliver_later
       end
     end
-    
+
     validates :name, :description, :inventory_count, presence: true
-     
-      
 end
