@@ -7,6 +7,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @product = Product.find(params[:id])
   end
 
   def new
@@ -16,18 +17,19 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to @product
+      redirect_to @product, notice: "Product was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
   end
+  
 
   def edit
   end
 
   def update
     if @product.update(product_params)
-      redirect_to @product
+      redirect_to @product, notice: "Product updated successfully."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -35,7 +37,7 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
-    redirect_to products_path
+    redirect_to products_path, notice: "Product deleted successfully."
   end
 
   private
@@ -44,6 +46,6 @@ class ProductsController < ApplicationController
     end
 
     def product_params
-      params.expect(product: [ :name, :description, :featured_image, :inventory_count ])
+      params.require(:product).permit(:name, :description, :featured_image, :inventory_count)
     end
 end

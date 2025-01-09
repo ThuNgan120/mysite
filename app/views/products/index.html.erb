@@ -1,12 +1,26 @@
-<h1><%= t ".title" %></h1>
-
-
-<%= link_to "Login", new_session_path unless authenticated? %>
-
-<div id="products">
+<% if authenticated? %>
+  <!-- Hiển thị nội dung khi đã đăng nhập -->
+  <h1 class="row justify-content-center">Products</h1>
+  <%= button_to "New product", new_product_path, method: :get, class: "btn btn-primary" %>
+  <div class="row">
   <% @products.each do |product| %>
-    <div>
-      <%= link_to product.name, product %>
+    <div class="col-md-3"> <!-- Giới hạn card vào cột -->
+      <div class="card mb-4" style="max-width: 15rem;"> <!-- Giới hạn kích thước card -->
+        <% if product.featured_image.attached? %>
+          <%= image_tag product.featured_image, class: "img-fluid", style: "height: 200px; object-fit: cover;" %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= product.name %></h5>
+          <p ><strong>Inventory Count:</strong> <%= product.inventory_count %></p>
+          <%= link_to "View", product, class: "btn btn-primary" %>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
+</div>
+  </div>
+<% else %>
+  <!-- Hiển thị form đăng nhập/đăng ký khi chưa đăng nhập -->
+  <%= render 'sessions/form' %> <!-- Giả sử bạn có form đăng nhập trong partial _form.html.erb -->
+<% end %>
