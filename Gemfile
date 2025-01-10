@@ -65,10 +65,3 @@ group :test do
 end
 
 gem "cssbundling-rails"
-end
-end
-
-
-
-
-
