@@ -63,6 +63,8 @@ class ProductsController < ApplicationController
 
   # Callback để set sản phẩm cho các action show, edit, update, destroy
   def set_product
-    @product = Product.find_by(id: params[:id])
-    unless @product
-      redirect_to products_path, alert: "
+    @product = Product.find(params[:id])
+  def product_params
+      params.require(:product).permit(:name, :description, :featured_image, :inventory_count)
+  end
+end
