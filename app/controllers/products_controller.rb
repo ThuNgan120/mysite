@@ -64,6 +64,7 @@ class ProductsController < ApplicationController
   # Callback để set sản phẩm cho các action show, edit, update, destroy
   def set_product
     @product = Product.find(params[:id])
+  end
   def product_params
       params.require(:product).permit(:name, :description, :featured_image, :inventory_count)
   end
